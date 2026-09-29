@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus’s PBX // Personal Hub & Tech Center</title>
+    <title>Marcus's PBX</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -96,6 +96,9 @@
     <!-- SCANLINE ANIMATION BAR -->
     <div class="scanline-bar"></div>
 
+    <!-- AUDIO ELEMENT FOR LIVE STREAMING -->
+    <audio id="live-audio" preload="none"></audio>
+
     <!-- TOP HEADER -->
     <header class="border-b border-hub-border bg-hub-card/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -108,7 +111,7 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="font-bold tracking-wider text-lg text-cyan-400 glow-text-cyan">MARCUS’S PBX</span>
-                        <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">v5.0</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">v5.2</span>
                     </div>
                     <p class="text-xs text-hub-dim">PERSONAL TECH & STREAMING HUB</p>
                 </div>
@@ -138,23 +141,23 @@
                 <button onclick="switchTab('home')" id="btn-home" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 bg-cyan-500/10 text-cyan-400 border border-cyan-500/40">
                     <i class="fa-solid fa-house"></i> Dashboard
                 </button>
-                <button onclick="switchTab('clock')" id="btn-clock" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
-                    <i class="fa-solid fa-clock"></i> Clock Page
-                </button>
                 <button onclick="switchTab('radio')" id="btn-radio" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
                     <i class="fa-solid fa-radio"></i> Radio Stream
                 </button>
-                <button onclick="switchTab('games')" id="btn-games" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
-                    <i class="fa-solid fa-gamepad"></i> Arcade
+                <button onclick="switchTab('clock')" id="btn-clock" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
+                    <i class="fa-solid fa-clock"></i> Clock Page
                 </button>
                 <button onclick="switchTab('directory')" id="btn-directory" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
                     <i class="fa-solid fa-address-book"></i> Directory
                 </button>
-                <button onclick="switchTab('discord')" id="btn-discord" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
-                    <i class="fa-brands fa-discord"></i> Discord Hub
+                <button onclick="switchTab('games')" id="btn-games" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
+                    <i class="fa-solid fa-gamepad"></i> Arcade
                 </button>
                 <button onclick="switchTab('wishlist')" id="btn-wishlist" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
                     <i class="fa-solid fa-cart-shopping"></i> Wish List
+                </button>
+                <button onclick="switchTab('discord')" id="btn-discord" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
+                    <i class="fa-brands fa-discord"></i> Discord Hub
                 </button>
             </div>
         </nav>
@@ -178,14 +181,14 @@
                         Welcome to <span class="text-cyan-400 glow-text-cyan">Marcus’s PBX</span>
                     </h1>
                     <p class="text-hub-dim text-sm md:text-base leading-relaxed mb-6">
-                        Your private telecommunication gateway, live radio stream, clock suite, extension directory, arcade center, and Amazon wish list command hub.
+                        Your private telecommunication gateway, live internet radio stream, clock suite, extension directory, arcade center, and Amazon wish list command hub.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <button onclick="switchTab('clock')" class="px-5 py-2.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-cyan-500/20 flex items-center gap-2">
-                            <i class="fa-solid fa-clock"></i> Open Clock Suite
-                        </button>
                         <button onclick="switchTab('radio')" class="px-5 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
                             <i class="fa-solid fa-radio"></i> Listen to Radio
+                        </button>
+                        <button onclick="switchTab('clock')" class="px-5 py-2.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-cyan-500/20 flex items-center gap-2">
+                            <i class="fa-solid fa-clock"></i> Open Clock Suite
                         </button>
                         <button onclick="switchTab('directory')" class="px-5 py-2.5 rounded bg-hub-dark hover:bg-hub-border text-cyan-400 border border-cyan-500/40 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2">
                             <i class="fa-solid fa-address-book"></i> Directory
@@ -196,32 +199,32 @@
 
             <!-- Quick Access Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Clock Quick Card -->
+                <!-- Radio Quick Card -->
                 <div class="rounded-xl bg-hub-card border border-hub-border p-5 flex flex-col justify-between hover:border-cyan-500/50 transition">
                     <div>
                         <div class="flex items-center justify-between pb-3 border-b border-hub-border mb-4">
-                            <h2 class="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-clock"></i> Time Suite
+                            <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-radio"></i> Live Radio
                             </h2>
-                            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">SYNCED</span>
+                            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">STREAMING</span>
                         </div>
-                        <p class="text-xs text-hub-dim mb-4">Digital LED, analog canvas, stopwatch, and world clocks with precise timekeeping.</p>
+                        <p class="text-xs text-hub-dim mb-4">Tune into working internet radio streams (Synthwave, Lo-Fi, Groove Salad, etc.).</p>
                     </div>
-                    <button onclick="switchTab('clock')" class="w-full py-2 bg-hub-dark hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded text-xs font-bold transition">Launch Clock Page</button>
+                    <button onclick="switchTab('radio')" class="w-full py-2 bg-hub-dark hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded text-xs font-bold transition">Launch Radio Player</button>
                 </div>
 
                 <!-- Directory Quick Card -->
                 <div class="rounded-xl bg-hub-card border border-hub-border p-5 flex flex-col justify-between hover:border-cyan-500/50 transition">
                     <div>
                         <div class="flex items-center justify-between pb-3 border-b border-hub-border mb-4">
-                            <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                            <h2 class="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
                                 <i class="fa-solid fa-address-book"></i> Extensions
                             </h2>
                             <span class="text-[10px] text-cyan-400">25 Entries</span>
                         </div>
                         <p class="text-xs text-hub-dim mb-4">Browse Marcus's PBX extension list sorted numerically from least to greatest cleanly.</p>
                     </div>
-                    <button onclick="switchTab('directory')" class="w-full py-2 bg-hub-dark hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded text-xs font-bold transition">View Directory</button>
+                    <button onclick="switchTab('directory')" class="w-full py-2 bg-hub-dark hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded text-xs font-bold transition">View Directory</button>
                 </div>
 
                 <!-- Wishlist Quick Card -->
@@ -240,7 +243,115 @@
             </div>
         </div>
 
-        <!-- ================= TAB 2: CLOCK PAGE ================= -->
+        <!-- ================= TAB 2: RADIO ================= -->
+        <div id="tab-radio" class="tab-content hidden space-y-6">
+            <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-cyan-400 glow-text-cyan flex items-center gap-3">
+                        <i class="fa-solid fa-radio"></i> Marcus’s PBX Radio Stream
+                    </h2>
+                    <p class="text-xs text-hub-dim mt-1">Live working internet radio streams broadcasting through switchboard lines.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Live Broadcast</span>
+                </div>
+            </div>
+
+            <!-- Radio Player Box -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Player Deck -->
+                <div class="lg:col-span-2 rounded-xl bg-hub-card border border-hub-border p-6 md:p-8 flex flex-col justify-between relative overflow-hidden glow-box-cyan">
+                    <div class="absolute -right-16 -top-16 opacity-5 text-9xl text-cyan-400 pointer-events-none">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+
+                    <!-- Station Selector -->
+                    <div class="flex flex-wrap gap-2 mb-6 relative z-10">
+                        <button onclick="setRadioStation(0)" id="station-btn-0" class="px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition">1. SomaFM Groove Salad</button>
+                        <button onclick="setRankStation(1)" onclick="setRadioStation(1)" id="station-btn-1" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">2. SomaFM Secret Agent</button>
+                        <button onclick="setRadioStation(2)" id="station-btn-2" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">3. Lo-Fi Chill Beats</button>
+                    </div>
+
+                    <!-- Track Metadata & Visualizer -->
+                    <div class="space-y-4 mb-8 relative z-10">
+                        <div>
+                            <span class="text-[10px] text-cyan-400 uppercase tracking-widest" id="radio-genre">AMBIENT // DOWNTEMPO</span>
+                            <h3 class="text-xl md:text-2xl font-bold text-white mt-1" id="radio-title">Groove Salad (SomaFM)</h3>
+                            <p class="text-xs text-hub-dim mt-0.5" id="radio-artist">A nicely chilled plate of ambient/downtempo grooves</p>
+                        </div>
+
+                        <!-- Equalizer Simulation Canvas -->
+                        <div class="bg-hub-dark border border-hub-border rounded-lg p-3 h-24 flex items-end justify-between gap-1 overflow-hidden">
+                            <div class="eq-bar w-full bg-cyan-500 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-emerald-400 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-300 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-emerald-500 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-500 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-emerald-400 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-300 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 15%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Playback Controls -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-hub-border relative z-10">
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleRadioPlay()" id="radio-play-btn" class="w-12 h-12 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-cyan-500/30">
+                                <i class="fa-solid fa-play" id="radio-play-icon"></i>
+                            </button>
+                            <button onclick="nextRadioStation()" class="w-10 h-10 rounded-full bg-hub-dark border border-hub-border text-cyan-400 flex items-center justify-center hover:bg-hub-border transition" title="Next Station">
+                                <i class="fa-solid fa-forward-step"></i>
+                            </button>
+                        </div>
+
+                        <!-- Volume Slider -->
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <i class="fa-solid fa-volume-high text-hub-dim text-xs"></i>
+                            <input type="range" min="0" max="100" value="80" oninput="setRadioVolume(this.value)" class="w-32 accent-cyan-400 cursor-pointer">
+                            <span class="text-xs text-hub-dim w-8 text-right" id="volume-text">80%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Station Playlist Sidebar -->
+                <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-ul"></i> Available Stations
+                        </h3>
+                        <div class="space-y-2.5 text-xs" id="radio-queue">
+                            <div class="p-2.5 rounded bg-cyan-950/40 border border-cyan-500/40 text-cyan-300 flex items-center justify-between cursor-pointer" onclick="setRadioStation(0)">
+                                <div>
+                                    <div class="font-bold">Groove Salad</div>
+                                    <div class="text-[10px] text-hub-dim">SomaFM Ambient</div>
+                                </div>
+                                <i class="fa-solid fa-tower-broadcast text-xs"></i>
+                            </div>
+                            <div class="p-2.5 rounded bg-hub-dark border border-hub-border text-hub-dim flex items-center justify-between cursor-pointer hover:border-cyan-500/50" onclick="setRadioStation(1)">
+                                <div>
+                                    <div class="font-bold text-white">Secret Agent</div>
+                                    <div class="text-[10px]">SomaFM Spy / Lounge</div>
+                                </div>
+                            </div>
+                            <div class="p-2.5 rounded bg-hub-dark border border-hub-border text-hub-dim flex items-center justify-between cursor-pointer hover:border-cyan-500/50" onclick="setRadioStation(2)">
+                                <div>
+                                    <div class="font-bold text-white">Lo-Fi Chill Beats</div>
+                                    <div class="text-[10px]">Reliable Chill Stream</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-hub-border text-center">
+                        <span class="text-[10px] text-hub-dim">STREAM STATUS: <strong class="text-emerald-400" id="stream-status-text">STANDBY</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: CLOCK PAGE ================= -->
         <div id="tab-clock" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
@@ -338,115 +449,39 @@
             </div>
         </div>
 
-        <!-- ================= TAB 3: RADIO ================= -->
-        <div id="tab-radio" class="tab-content hidden space-y-6">
+        <!-- ================= TAB 4: DIRECTORY ================= -->
+        <div id="tab-directory" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-cyan-400 glow-text-cyan flex items-center gap-3">
-                        <i class="fa-solid fa-radio"></i> Marcus’s PBX Radio Stream
+                        <i class="fa-solid fa-address-book"></i> Member Directory
                     </h2>
-                    <p class="text-xs text-hub-dim mt-1">Immersive audio frequencies streaming directly through switchboard lines.</p>
+                    <p class="text-xs text-hub-dim mt-1">Official extension directory for Marcus’s PBX sorted numerically from least to greatest.</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Live Broadcast</span>
+                <div class="w-full md:w-auto">
+                    <input type="text" id="dir-search" placeholder="Search extensions or devices..." onkeyup="filterDirectory()" class="bg-hub-dark border border-hub-border rounded px-4 py-2 text-xs text-cyan-300 focus:outline-none focus:border-cyan-500 w-full md:w-64">
                 </div>
             </div>
 
-            <!-- Radio Player Box -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Main Player Deck -->
-                <div class="lg:col-span-2 rounded-xl bg-hub-card border border-hub-border p-6 md:p-8 flex flex-col justify-between relative overflow-hidden glow-box-cyan">
-                    <div class="absolute -right-16 -top-16 opacity-5 text-9xl text-cyan-400 pointer-events-none">
-                        <i class="fa-solid fa-music"></i>
-                    </div>
-
-                    <!-- Station Selector -->
-                    <div class="flex flex-wrap gap-2 mb-6 relative z-10">
-                        <button onclick="setRadioStation(0)" id="station-btn-0" class="px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition">1. Synthwave FM</button>
-                        <button onclick="setRadioStation(1)" id="station-btn-1" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">2. Lo-Fi Terminal</button>
-                        <button onclick="setRadioStation(2)" id="station-btn-2" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">3. Cyberpunk Beats</button>
-                    </div>
-
-                    <!-- Track Metadata & Visualizer -->
-                    <div class="space-y-4 mb-8 relative z-10">
-                        <div>
-                            <span class="text-[10px] text-cyan-400 uppercase tracking-widest" id="radio-genre">SYNTHWAVE // RETRO ELECTRO</span>
-                            <h3 class="text-xl md:text-2xl font-bold text-white mt-1" id="radio-title">Neon Sunset over Tokyo</h3>
-                            <p class="text-xs text-hub-dim mt-0.5" id="radio-artist">Kavinsky & The Midnight Analog</p>
-                        </div>
-
-                        <!-- Equalizer Simulation Canvas -->
-                        <div class="bg-hub-dark border border-hub-border rounded-lg p-3 h-24 flex items-end justify-between gap-1 overflow-hidden">
-                            <div class="eq-bar w-full bg-cyan-500 rounded-t transition-all duration-150" style="height: 30%;"></div>
-                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 60%;"></div>
-                            <div class="eq-bar w-full bg-emerald-400 rounded-t transition-all duration-150" style="height: 45%;"></div>
-                            <div class="eq-bar w-full bg-cyan-300 rounded-t transition-all duration-150" style="height: 85%;"></div>
-                            <div class="eq-bar w-full bg-emerald-500 rounded-t transition-all duration-150" style="height: 50%;"></div>
-                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 70%;"></div>
-                            <div class="eq-bar w-full bg-cyan-500 rounded-t transition-all duration-150" style="height: 25%;"></div>
-                            <div class="eq-bar w-full bg-emerald-400 rounded-t transition-all duration-150" style="height: 90%;"></div>
-                            <div class="eq-bar w-full bg-cyan-300 rounded-t transition-all duration-150" style="height: 65%;"></div>
-                            <div class="eq-bar w-full bg-cyan-400 rounded-t transition-all duration-150" style="height: 40%;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Playback Controls -->
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-hub-border relative z-10">
-                        <div class="flex items-center gap-3">
-                            <button onclick="toggleRadioPlay()" id="radio-play-btn" class="w-12 h-12 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-cyan-500/30">
-                                <i class="fa-solid fa-play" id="radio-play-icon"></i>
-                            </button>
-                            <button onclick="nextRadioTrack()" class="w-10 h-10 rounded-full bg-hub-dark border border-hub-border text-cyan-400 flex items-center justify-center hover:bg-hub-border transition">
-                                <i class="fa-solid fa-forward-step"></i>
-                            </button>
-                        </div>
-
-                        <!-- Volume Slider -->
-                        <div class="flex items-center gap-3 w-full sm:w-auto">
-                            <i class="fa-solid fa-volume-high text-hub-dim text-xs"></i>
-                            <input type="range" min="0" max="100" value="70" oninput="setRadioVolume(this.value)" class="w-32 accent-cyan-400 cursor-pointer">
-                            <span class="text-xs text-hub-dim w-8 text-right" id="volume-text">70%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Station Playlist Sidebar -->
-                <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-list-ul"></i> Broadcast Queue
-                        </h3>
-                        <div class="space-y-2.5 text-xs" id="radio-queue">
-                            <div class="p-2.5 rounded bg-cyan-950/40 border border-cyan-500/40 text-cyan-300 flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold">Neon Sunset over Tokyo</div>
-                                    <div class="text-[10px] text-hub-dim">Synthwave FM</div>
-                                </div>
-                                <i class="fa-solid fa-volume-high text-xs animate-pulse"></i>
-                            </div>
-                            <div class="p-2.5 rounded bg-hub-dark border border-hub-border text-hub-dim flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Midnight Terminal Session</div>
-                                    <div class="text-[10px]">Lo-Fi Terminal</div>
-                                </div>
-                            </div>
-                            <div class="p-2.5 rounded bg-hub-dark border border-hub-border text-hub-dim flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Cyberpunk Grid Runner</div>
-                                    <div class="text-[10px]">Cyberpunk Beats</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-hub-border text-center">
-                        <span class="text-[10px] text-hub-dim">AUDIO STREAM: 320 KBPS OGG</span>
-                    </div>
+            <!-- Directory Table Card (No Status, No Call Buttons) -->
+            <div class="rounded-xl bg-hub-card border border-hub-border overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-hub-dark border-b border-hub-border text-hub-dim uppercase text-[11px]">
+                                <th class="py-3 px-6">Extension / Code</th>
+                                <th class="py-3 px-6">Device / Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="directory-tbody" class="divide-y divide-hub-border">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 4: GAMES ================= -->
+        <!-- ================= TAB 5: GAMES ================= -->
         <div id="tab-games" class="tab-content hidden space-y-6">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-hub-card border border-hub-border p-6 rounded-xl">
                 <div>
@@ -557,39 +592,33 @@
             </div>
         </div>
 
-        <!-- ================= TAB 5: DIRECTORY ================= -->
-        <div id="tab-directory" class="tab-content hidden space-y-6">
+        <!-- ================= TAB 6: WISHLIST ================= -->
+        <div id="tab-wishlist" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-cyan-400 glow-text-cyan flex items-center gap-3">
-                        <i class="fa-solid fa-address-book"></i> Member Directory
+                    <h2 class="text-2xl font-bold text-emerald-400 glow-text-green flex items-center gap-3">
+                        <i class="fa-solid fa-cart-shopping"></i> Amazon Tech Wish List
                     </h2>
-                    <p class="text-xs text-hub-dim mt-1">Official extension directory for Marcus’s PBX sorted numerically from least to greatest.</p>
+                    <p class="text-xs text-hub-dim mt-1">Official hardware upgrades, networking gear, and smart home items from Marcus's Amazon Wish List.</p>
                 </div>
-                <div class="w-full md:w-auto">
-                    <input type="text" id="dir-search" placeholder="Search extensions or devices..." onkeyup="filterDirectory()" class="bg-hub-dark border border-hub-border rounded px-4 py-2 text-xs text-cyan-300 focus:outline-none focus:border-cyan-500 w-full md:w-64">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div class="bg-hub-dark px-4 py-2 rounded border border-hub-border text-xs">
+                        <span class="text-hub-dim">Total Items: <strong class="text-white">6</strong></span>
+                        <span class="text-hub-dim border-l border-hub-border pl-3">Est. Value: <strong class="text-emerald-400">$396.91</strong></span>
+                    </div>
+                    <a href="https://www.amazon.com/hz/wishlist/ls/1AZQETPCXDAJA?ref_=wl_share" target="_blank" class="px-4 py-2 rounded bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-external-link"></i> Official Wish List
+                    </a>
                 </div>
             </div>
 
-            <!-- Directory Table Card (No Status, No Call Buttons) -->
-            <div class="rounded-xl bg-hub-card border border-hub-border overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="bg-hub-dark border-b border-hub-border text-hub-dim uppercase text-[11px]">
-                                <th class="py-3 px-6">Extension / Code</th>
-                                <th class="py-3 px-6">Device / Location</th>
-                            </tr>
-                        </thead>
-                        <tbody id="directory-tbody" class="divide-y divide-hub-border">
-                            <!-- Populated dynamically via JS -->
-                        </tbody>
-                    </table>
-                </div>
+            <!-- Wishlist Grid (Exact Parsed Items from Screenshots & Link) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="wishlist-grid">
+                <!-- Populated via JS -->
             </div>
         </div>
 
-        <!-- ================= TAB 6: DISCORD ================= -->
+        <!-- ================= TAB 7: DISCORD ================= -->
         <div id="tab-discord" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 glow-box-cyan">
                 <div class="space-y-2 max-w-xl">
@@ -642,7 +671,7 @@
                                     <span class="font-bold text-cyan-300">Marcus_Admin</span>
                                     <span class="text-[10px] text-hub-dim">Today at 08:14 AM</span>
                                 </div>
-                                <p class="text-hub-dim">Just deployed the new Clock suite and precise timezone tools. Check them out!</p>
+                                <p class="text-hub-dim">Just deployed the new Clock suite and reliable audio streams. Check them out!</p>
                             </div>
                             <div class="p-3 rounded bg-hub-dark border border-hub-border">
                                 <div class="flex items-center justify-between mb-1">
@@ -660,32 +689,6 @@
             </div>
         </div>
 
-        <!-- ================= TAB 7: WISHLIST ================= -->
-        <div id="tab-wishlist" class="tab-content hidden space-y-6">
-            <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-emerald-400 glow-text-green flex items-center gap-3">
-                        <i class="fa-solid fa-cart-shopping"></i> Amazon Tech Wish List
-                    </h2>
-                    <p class="text-xs text-hub-dim mt-1">Official hardware upgrades, networking gear, and smart home items from Marcus's Amazon Wish List.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <div class="bg-hub-dark px-4 py-2 rounded border border-hub-border text-xs">
-                        <span class="text-hub-dim">Total Items: <strong class="text-white">6</strong></span>
-                        <span class="text-hub-dim border-l border-hub-border pl-3">Est. Value: <strong class="text-emerald-400">$396.91</strong></span>
-                    </div>
-                    <a href="https://www.amazon.com/hz/wishlist/ls/1AZQETPCXDAJA?ref_=wl_share" target="_blank" class="px-4 py-2 rounded bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg shadow-amber-500/20">
-                        <i class="fa-solid fa-external-link"></i> Official Wish List
-                    </a>
-                </div>
-            </div>
-
-            <!-- Wishlist Grid (Exact Parsed Items from Screenshots & Link) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="wishlist-grid">
-                <!-- Populated via JS -->
-            </div>
-        </div>
-
     </main>
 
     <!-- FOOTER -->
@@ -696,11 +699,11 @@
             </div>
             <div class="flex items-center gap-4">
                 <a href="#" onclick="switchTab('home')" class="hover:text-cyan-400 transition">Dashboard</a>
-                <a href="#" onclick="switchTab('clock')" class="hover:text-cyan-400 transition">Clock</a>
                 <a href="#" onclick="switchTab('radio')" class="hover:text-cyan-400 transition">Radio</a>
+                <a href="#" onclick="switchTab('clock')" class="hover:text-cyan-400 transition">Clock</a>
                 <a href="#" onclick="switchTab('directory')" class="hover:text-cyan-400 transition">Directory</a>
-                <a href="#" onclick="switchTab('discord')" class="hover:text-cyan-400 transition">Discord</a>
                 <a href="#" onclick="switchTab('wishlist')" class="hover:text-cyan-400 transition">Wish List</a>
+                <a href="#" onclick="switchTab('discord')" class="hover:text-cyan-400 transition">Discord</a>
             </div>
         </div>
     </footer>
@@ -938,43 +941,32 @@
             btn.className = "px-6 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition";
         }
 
-        // --- 2. Radio Player Logic ---
+        // --- 2. Radio Player Logic with Real Working Streams ---
         const radioStations = [
             {
-                name: "Synthwave FM",
-                artist: "Kavinsky & The Midnight Analog",
-                genre: "SYNTHWAVE // RETRO ELECTRO",
-                queue: [
-                    { title: "Neon Sunset over Tokyo", artist: "Synthwave FM" },
-                    { title: "Nightcall Highway 101", artist: "Kavinsky" },
-                    { title: "Grid Runner 1984", artist: "Analog Dreams" }
-                ]
+                name: "Groove Salad",
+                artist: "SomaFM Ambient / Downtempo",
+                genre: "AMBIENT // DOWNTEMPO",
+                url: "https://ice2.somafm.com/groovesalad-128-mp3"
             },
             {
-                name: "Lo-Fi Terminal",
-                artist: "Chill Switch & Dev Beats",
-                genre: "LO-FI // STUDY & CODE",
-                queue: [
-                    { title: "Midnight Terminal Session", artist: "Lo-Fi Terminal" },
-                    { title: "Packet Loss Coffee", artist: "Chill Switch" },
-                    { title: "Compile Time Memories", artist: "Dev Beats" }
-                ]
+                name: "Secret Agent",
+                artist: "SomaFM Spy / Lounge / Soundtrack",
+                genre: "LOUNGE // SPY JAZZ",
+                url: "https://ice4.somafm.com/secretagent-128-mp3"
             },
             {
-                name: "Cyberpunk Beats",
-                artist: "Neon Core & Industrial Synth",
-                genre: "CYBERPUNK // DARK ELECTRO",
-                queue: [
-                    { title: "Cyberpunk Grid Runner", artist: "Cyberpunk Beats" },
-                    { title: "Subnet Overclock", artist: "Neon Core" },
-                    { title: "Neural Link Protocol", artist: "Industrial Synth" }
-                ]
+                name: "Lo-Fi Chill Beats",
+                artist: "Relaxing Terminal Beats",
+                genre: "LO-FI // CHILLHOP",
+                url: "https://streams.ilovemusic.de/ilove-lofi-128.mp3"
             }
         ];
 
         let currentStationIdx = 0;
         let isRadioPlaying = false;
         let radioInterval = null;
+        const audioElement = document.getElementById('live-audio');
 
         function setRadioStation(idx) {
             currentStationIdx = idx;
@@ -982,56 +974,63 @@
             
             for(let i=0; i<radioStations.length; i++) {
                 const btn = document.getElementById(`station-btn-${i}`);
-                if(i === idx) {
-                    btn.className = "px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-                } else {
-                    btn.className = "px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
+                if(btn) {
+                    if(i === idx) {
+                        btn.className = "px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
+                    } else {
+                        btn.className = "px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
+                    }
                 }
             }
 
             document.getElementById('radio-genre').innerText = station.genre;
-            document.getElementById('radio-title').innerText = station.queue[0].title;
-            document.getElementById('radio-artist').innerText = station.queue[0].artist;
+            document.getElementById('radio-title').innerText = station.name;
+            document.getElementById('radio-artist').innerText = station.artist;
 
-            const queueEl = document.getElementById('radio-queue');
-            queueEl.innerHTML = '';
-            station.queue.forEach((q, i) => {
-                const div = document.createElement('div');
-                if(i === 0 && isRadioPlaying) {
-                    div.className = "p-2.5 rounded bg-cyan-950/40 border border-cyan-500/40 text-cyan-300 flex items-center justify-between";
-                    div.innerHTML = `<div><div class="font-bold">${q.title}</div><div class="text-[10px] text-hub-dim">${station.name}</div></div><i class="fa-solid fa-volume-high text-xs animate-pulse"></i>`;
-                } else {
-                    div.className = "p-2.5 rounded bg-hub-dark border border-hub-border text-hub-dim flex items-center justify-between";
-                    div.innerHTML = `<div><div class="font-bold text-white">${q.title}</div><div class="text-[10px]">${station.name}</div></div>`;
-                }
-                queueEl.appendChild(div);
-            });
+            audioElement.src = station.url;
+            if(isRadioPlaying) {
+                audioElement.play().catch(e => console.log("Audio play error:", e));
+            }
         }
 
         function toggleRadioPlay() {
             isRadioPlaying = !isRadioPlaying;
             const icon = document.getElementById('radio-play-icon');
             const btn = document.getElementById('radio-play-btn');
+            const statusText = document.getElementById('stream-status-text');
             
             if(isRadioPlaying) {
                 icon.className = "fa-solid fa-pause";
                 btn.className = "w-12 h-12 rounded-full bg-emerald-400 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-emerald-400/30";
+                statusText.innerText = "CONNECTING...";
+                audioElement.src = radioStations[currentStationIdx].url;
+                audioElement.play().then(() => {
+                    statusText.innerText = "LIVE";
+                }).catch(e => {
+                    statusText.innerText = "ERROR";
+                    console.log("Playback error:", e);
+                });
                 startEqualizer();
             } else {
                 icon.className = "fa-solid fa-play";
                 btn.className = "w-12 h-12 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-cyan-500/30";
+                statusText.innerText = "STANDBY";
+                audioElement.pause();
                 stopEqualizer();
             }
-            setRadioStation(currentStationIdx);
         }
 
-        function nextRadioTrack() {
+        function nextRadioStation() {
             currentStationIdx = (currentStationIdx + 1) % radioStations.length;
             setRadioStation(currentStationIdx);
+            if(isRadioPlaying) {
+                audioElement.play().catch(e => console.log("Audio play error:", e));
+            }
         }
 
         function setRadioVolume(val) {
             document.getElementById('volume-text').innerText = `${val}%`;
+            audioElement.volume = val / 100;
         }
 
         function startEqualizer() {
@@ -1276,7 +1275,6 @@
             { ext: "*99", device: "Conference room" }
         ];
 
-        // Custom sort function for extensions (numeric comparison where possible, alphanumeric fallback)
         function sortExtensions(a, b) {
             const cleanA = a.ext.replace(/[^0-9]/g, '');
             const cleanB = b.ext.replace(/[^0-9]/g, '');
