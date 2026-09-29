@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus's PBX</title>
+    <title>Marcus’s PBX</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -144,6 +144,9 @@
                 <button onclick="switchTab('radio')" id="btn-radio" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
                     <i class="fa-solid fa-radio"></i> Radio Stream
                 </button>
+                <button onclick="switchTab('spotify')" id="btn-spotify" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-emerald-300 hover:bg-hub-border/50">
+                    <i class="fa-brands fa-spotify"></i> Spotify Playlist
+                </button>
                 <button onclick="switchTab('clock')" id="btn-clock" class="tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50">
                     <i class="fa-solid fa-clock"></i> Clock Page
                 </button>
@@ -181,24 +184,40 @@
                         Welcome to <span class="text-cyan-400 glow-text-cyan">Marcus’s PBX</span>
                     </h1>
                     <p class="text-hub-dim text-sm md:text-base leading-relaxed mb-6">
-                        Your private telecommunication gateway, live internet radio stream, clock suite, extension directory, arcade center, and Amazon wish list command hub.
+                        Your private telecommunication gateway, live internet radio stream, custom Spotify playlist integration, extension directory, arcade center, and wishlist command hub.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <button onclick="switchTab('radio')" class="px-5 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
-                            <i class="fa-solid fa-radio"></i> Listen to Radio
+                        <button onclick="switchTab('spotify')" class="px-5 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+                            <i class="fa-brands fa-spotify"></i> Open Spotify Playlist
+                        </button>
+                        <button onclick="switchTab('radio')" class="px-5 py-2.5 rounded bg-hub-dark hover:bg-hub-border text-emerald-400 border border-emerald-500/40 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2">
+                            <i class="fa-solid fa-radio"></i> Radio Stream
                         </button>
                         <button onclick="switchTab('clock')" class="px-5 py-2.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-cyan-500/20 flex items-center gap-2">
                             <i class="fa-solid fa-clock"></i> Open Clock Suite
-                        </button>
-                        <button onclick="switchTab('directory')" class="px-5 py-2.5 rounded bg-hub-dark hover:bg-hub-border text-cyan-400 border border-cyan-500/40 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2">
-                            <i class="fa-solid fa-address-book"></i> Directory
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Access Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Quick Access Cards including Spotify Playlist -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Spotify Quick Card -->
+                <div class="rounded-xl bg-hub-card border border-emerald-500/40 p-5 flex flex-col justify-between hover:border-emerald-400 transition glow-box-green">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-hub-border mb-4">
+                            <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-brands fa-spotify"></i> Spotify
+                            </h2>
+                            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">PLAYLIST</span>
+                        </div>
+                        <p class="text-xs text-hub-dim mb-4">Direct feed of Marcus's curated personal Spotify playlist.</p>
+                    </div>
+                    <button onclick="switchTab('spotify')" class="w-full py-2 bg-emerald-500 hover:bg-emerald-400 text-black rounded text-xs font-bold transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Launch Playlist
+                    </button>
+                </div>
+
                 <!-- Radio Quick Card -->
                 <div class="rounded-xl bg-hub-card border border-hub-border p-5 flex flex-col justify-between hover:border-cyan-500/50 transition">
                     <div>
@@ -243,6 +262,66 @@
             </div>
         </div>
 
+        <!-- ================= STREAMING_CHUNK:Rendering Spotify playlist tab ================= -->
+        <!-- TAB: SPOTIFY PLAYLIST -->
+        <div id="tab-spotify" class="tab-content hidden space-y-6">
+            <div class="bg-hub-card border border-emerald-500/40 p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 glow-box-green">
+                <div>
+                    <h2 class="text-2xl font-bold text-emerald-400 glow-text-green flex items-center gap-3">
+                        <i class="fa-brands fa-spotify"></i> Marcus’s Curated Spotify Playlist
+                    </h2>
+                    <p class="text-xs text-hub-dim mt-1">Direct embedded Spotify playlist feed connected to the PBX sound terminal.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="https://open.spotify.com/playlist/5iHOt0ZKo61rz9wFCdf5Tq?si=dCovDJT9TjWGH91QKR5LPQ&utm_source=copy-link&pi=99iKczePRfSef" target="_blank" class="px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase transition flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-external-link-alt"></i> Open in Spotify App
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Embedded Spotify Player Iframe -->
+                <div class="lg:col-span-2 rounded-xl bg-hub-card border border-hub-border p-4 flex flex-col justify-center min-h-[460px]">
+                    <div class="w-full h-full rounded-lg overflow-hidden border border-hub-border bg-hub-dark">
+                        <!-- Spotify Embed URL generated from user playlist link ID: 5iHOt0ZKo61rz9wFCdf5Tq -->
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5iHOt0ZKo61rz9wFCdf5Tq?utm_source=generator&theme=0" width="100%" height="420" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <!-- Spotify Info Sidebar -->
+                <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> Playlist Specs
+                        </h3>
+                        <ul class="space-y-3 text-xs text-hub-dim">
+                            <li class="flex justify-between border-b border-hub-border pb-2">
+                                <span>Platform:</span>
+                                <strong class="text-white">Spotify Web API</strong>
+                            </li>
+                            <li class="flex justify-between border-b border-hub-border pb-2">
+                                <span>Status:</span>
+                                <strong class="text-emerald-400">Connected</strong>
+                            </li>
+                            <li class="flex justify-between border-b border-hub-border pb-2">
+                                <span>Access:</span>
+                                <strong class="text-cyan-300">Public Stream</strong>
+                            </li>
+                            <li class="flex justify-between border-b border-hub-border pb-2">
+                                <span>Share Link:</span>
+                                <button onclick="copySpotifyLink()" class="text-emerald-400 hover:underline flex items-center gap-1">
+                                    <i class="fa-solid fa-copy"></i> Copy Link
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-hub-border text-center">
+                        <span class="text-[10px] text-hub-dim">PBX AUDIO FEED: <strong class="text-emerald-400">ACTIVE</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ================= TAB 2: RADIO ================= -->
         <div id="tab-radio" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -269,7 +348,7 @@
                     <!-- Station Selector -->
                     <div class="flex flex-wrap gap-2 mb-6 relative z-10">
                         <button onclick="setRadioStation(0)" id="station-btn-0" class="px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition">1. SomaFM Groove Salad</button>
-                        <button onclick="setRankStation(1)" onclick="setRadioStation(1)" id="station-btn-1" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">2. SomaFM Secret Agent</button>
+                        <button onclick="setRadioStation(1)" id="station-btn-1" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">2. SomaFM Secret Agent</button>
                         <button onclick="setRadioStation(2)" id="station-btn-2" class="px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">3. Lo-Fi Chill Beats</button>
                     </div>
 
@@ -463,131 +542,54 @@
                 </div>
             </div>
 
-            <!-- Directory Table Card (No Status, No Call Buttons) -->
+            <!-- Directory Table Card -->
             <div class="rounded-xl bg-hub-card border border-hub-border overflow-hidden">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="bg-hub-dark border-b border-hub-border text-hub-dim uppercase text-[11px]">
-                                <th class="py-3 px-6">Extension / Code</th>
-                                <th class="py-3 px-6">Device / Location</th>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-hub-dark text-hub-dim border-b border-hub-border uppercase tracking-wider">
+                            <tr>
+                                <th class="p-4">Ext</th>
+                                <th class="p-4">Name / Device</th>
+                                <th class="p-4">Node / Location</th>
+                                <th class="p-4">Protocol</th>
                             </tr>
                         </thead>
-                        <tbody id="directory-tbody" class="divide-y divide-hub-border">
-                            <!-- Populated dynamically via JS -->
+                        <tbody id="directory-list" class="divide-y divide-hub-border">
+                            <!-- Populated dynamically via JS sorted least to greatest -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 5: GAMES ================= -->
+        <!-- ================= TAB 5: ARCADE ================= -->
         <div id="tab-games" class="tab-content hidden space-y-6">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-hub-card border border-hub-border p-6 rounded-xl">
+            <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-cyan-400 glow-text-cyan flex items-center gap-3">
-                        <i class="fa-solid fa-gamepad"></i> Arcade & Mini-Games
+                        <i class="fa-solid fa-gamepad"></i> PBX Arcade Center
                     </h2>
-                    <p class="text-xs text-hub-dim mt-1">Play classic browser arcade games while waiting for switchboard calls.</p>
-                </div>
-                <div class="flex gap-2">
-                    <button onclick="selectGame('snake')" id="btn-game-snake" class="px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition">Retro Snake</button>
-                    <button onclick="selectGame('clicker')" id="btn-game-clicker" class="px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300">Data Miner</button>
+                    <p class="text-xs text-hub-dim mt-1">Retro terminal mini-games for downtime between transmissions.</p>
                 </div>
             </div>
-
-            <!-- Game Container -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Main Game Screen -->
-                <div class="lg:col-span-2 rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col items-center justify-center relative min-h-[420px]">
-                    
-                    <!-- SNAKE GAME -->
-                    <div id="game-snake-container" class="w-full flex flex-col items-center">
-                        <div class="flex justify-between w-full max-w-[400px] mb-3 text-xs text-hub-dim">
-                            <span>SCORE: <strong id="snake-score" class="text-cyan-400 font-bold">0</strong></span>
-                            <span>HIGH SCORE: <strong id="snake-highscore" class="text-emerald-400 font-bold">0</strong></span>
-                        </div>
-                        <div class="relative bg-hub-dark border-2 border-cyan-500/40 rounded-lg overflow-hidden glow-box-cyan">
-                            <canvas id="snakeCanvas" width="400" height="400" class="block"></canvas>
-                            <div id="snake-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6">
-                                <h3 class="text-xl font-bold text-cyan-400 mb-2 glow-text-cyan">RETRO SNAKE</h3>
-                                <p class="text-xs text-hub-dim mb-4">Use Arrow Keys or on-screen buttons to navigate. Eat data nodes!</p>
-                                <button onclick="startSnakeGame()" class="px-6 py-2.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/20">Start Game</button>
-                            </div>
-                        </div>
-                        <!-- Mobile Controls for Snake -->
-                        <div class="grid grid-cols-3 gap-2 mt-4 max-w-[220px] w-full">
-                            <div></div>
-                            <button onclick="setSnakeDir('UP')" class="p-3 bg-hub-dark border border-hub-border hover:border-cyan-500 text-cyan-400 rounded text-sm"><i class="fa-solid fa-chevron-up"></i></button>
-                            <div></div>
-                            <button onclick="setSnakeDir('LEFT')" class="p-3 bg-hub-dark border border-hub-border hover:border-cyan-500 text-cyan-400 rounded text-sm"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button onclick="setSnakeDir('DOWN')" class="p-3 bg-hub-dark border border-hub-border hover:border-cyan-500 text-cyan-400 rounded text-sm"><i class="fa-solid fa-chevron-down"></i></button>
-                            <button onclick="setSnakeDir('RIGHT')" class="p-3 bg-hub-dark border border-hub-border hover:border-cyan-500 text-cyan-400 rounded text-sm"><i class="fa-solid fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- CLICKER GAME -->
-                    <div id="game-clicker-container" class="w-full hidden flex flex-col items-center text-center py-6">
-                        <div class="mb-6">
-                            <span class="text-xs text-hub-dim uppercase tracking-wider">Packets Mined</span>
-                            <div class="text-4xl font-bold text-emerald-400 glow-text-green mt-1" id="clicker-score">0</div>
-                            <span class="text-[10px] text-cyan-300" id="clicker-cps">+0 Packets / sec</span>
-                        </div>
-                        <button onclick="clickerPacket()" class="w-36 h-36 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 text-black font-extrabold text-lg uppercase tracking-wider shadow-2xl shadow-cyan-500/30 hover:scale-105 active:scale-95 transition flex flex-col items-center justify-center border-4 border-white/20">
-                            <i class="fa-solid fa-cube text-2xl mb-1"></i>
-                            <span>MINE</span>
-                        </button>
-                        <p class="text-xs text-hub-dim mt-6">Click the core to mine data packets and buy upgrades!</p>
-                    </div>
-
-                </div>
-
-                <!-- Sidebar -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-trophy"></i> Arcade Stats & Upgrades
-                        </h3>
-                        
-                        <!-- Snake Info -->
-                        <div id="sidebar-snake-info" class="space-y-3 text-xs text-hub-dim">
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border flex justify-between items-center">
-                                <span>Game Mode</span>
-                                <span class="text-cyan-300 font-bold">Classic 2D</span>
-                            </div>
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border flex justify-between items-center">
-                                <span>Difficulty</span>
-                                <span class="text-amber-400 font-bold">Normal</span>
-                            </div>
-                            <p class="text-[11px] leading-relaxed pt-2">Collect glowing green data packets to grow your pipeline. Avoid colliding with walls or yourself!</p>
-                        </div>
-
-                        <!-- Clicker Upgrades -->
-                        <div id="sidebar-clicker-info" class="hidden space-y-3">
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white text-xs">Fiber Router</div>
-                                    <div class="text-[10px] text-hub-dim">+1 Packet / sec</div>
-                                </div>
-                                <button onclick="buyUpgrade(1)" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-[10px] rounded transition">
-                                    Cost: <span id="cost-1">15</span>
-                                </button>
-                            </div>
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white text-xs">Quantum Server</div>
-                                    <div class="text-[10px] text-hub-dim">+8 Packets / sec</div>
-                                </div>
-                                <button onclick="buyUpgrade(2)" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-[10px] rounded transition">
-                                    Cost: <span id="cost-2">100</span>
-                                </button>
-                            </div>
-                        </div>
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">Terminal Snake</h3>
                     </div>
-
-                    <div class="mt-6 pt-4 border-t border-hub-border text-center">
-                        <span class="text-[10px] text-hub-dim">HIGH SCORES SAVED LOCALLY</span>
+                    <div class="my-4 bg-hub-dark h-48 rounded border border-hub-border flex items-center justify-center text-xs text-hub-dim">
+                        <span>[ Arcade Game Container Ready ]</span>
                     </div>
+                    <button onclick="showNotice('Launching Arcade Game...')" class="py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded text-xs transition">Play Snake</button>
+                </div>
+                <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">Retro Pong</h3>
+                    </div>
+                    <div class="my-4 bg-hub-dark h-48 rounded border border-hub-border flex items-center justify-center text-xs text-hub-dim">
+                        <span>[ Arcade Game Container Ready ]</span>
+                    </div>
+                    <button onclick="showNotice('Launching Arcade Game...')" class="py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded text-xs transition">Play Pong</button>
                 </div>
             </div>
         </div>
@@ -596,275 +598,195 @@
         <div id="tab-wishlist" class="tab-content hidden space-y-6">
             <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-emerald-400 glow-text-green flex items-center gap-3">
-                        <i class="fa-solid fa-cart-shopping"></i> Amazon Tech Wish List
+                    <h2 class="text-2xl font-bold text-amber-400 glow-text-cyan flex items-center gap-3">
+                        <i class="fa-solid fa-cart-shopping"></i> Hardware Wish List
                     </h2>
-                    <p class="text-xs text-hub-dim mt-1">Official hardware upgrades, networking gear, and smart home items from Marcus's Amazon Wish List.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <div class="bg-hub-dark px-4 py-2 rounded border border-hub-border text-xs">
-                        <span class="text-hub-dim">Total Items: <strong class="text-white">6</strong></span>
-                        <span class="text-hub-dim border-l border-hub-border pl-3">Est. Value: <strong class="text-emerald-400">$396.91</strong></span>
-                    </div>
-                    <a href="https://www.amazon.com/hz/wishlist/ls/1AZQETPCXDAJA?ref_=wl_share" target="_blank" class="px-4 py-2 rounded bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg shadow-amber-500/20">
-                        <i class="fa-solid fa-external-link"></i> Official Wish List
-                    </a>
+                    <p class="text-xs text-hub-dim mt-1">Upcoming lab equipment and gear upgrades for Marcus's PBX.</p>
                 </div>
             </div>
-
-            <!-- Wishlist Grid (Exact Parsed Items from Screenshots & Link) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="wishlist-grid">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="wishlist-grid">
                 <!-- Populated via JS -->
             </div>
         </div>
 
         <!-- ================= TAB 7: DISCORD ================= -->
         <div id="tab-discord" class="tab-content hidden space-y-6">
-            <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 glow-box-cyan">
-                <div class="space-y-2 max-w-xl">
-                    <div class="inline-block px-3 py-1 rounded bg-indigo-950 text-indigo-300 text-xs font-semibold border border-indigo-800">
-                        COMMUNITY GATEWAY
-                    </div>
-                    <h2 class="text-2xl font-bold text-white">Join the <span class="text-indigo-400">Marcus’s PBX</span> Discord</h2>
-                    <p class="text-xs text-hub-dim leading-relaxed">
-                        Connect with fellow tech enthusiasts, gamers, and community members. Share code, discuss retro tech, or hang out in voice channels.
-                    </p>
+            <div class="bg-hub-card border border-hub-border p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-cyan-400 glow-text-cyan flex items-center gap-3">
+                        <i class="fa-brands fa-discord"></i> Discord Switchboard Hub
+                    </h2>
+                    <p class="text-xs text-hub-dim mt-1">Connect with the community network and voice channels.</p>
                 </div>
-                <a href="https://discord.com/invite/K8DvzHeYY" target="_blank" class="px-6 py-3 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-indigo-600/30 flex items-center gap-2 whitespace-nowrap">
-                    <i class="fa-brands fa-discord text-lg"></i> Connect to Discord
-                </a>
             </div>
-
-            <!-- Styled Discord Widget Card -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-bold">
-                                <i class="fa-brands fa-discord"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white text-sm">Marcus's PBX Hub</h3>
-                                <p class="text-[11px] text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block mr-1"></span> 142 Online • 820 Members</p>
-                            </div>
-                        </div>
-                        <p class="text-xs text-hub-dim leading-relaxed mb-6">
-                            Active channels for general chat, tech support, gaming squads, and bot commands.
-                        </p>
-                    </div>
-                    <a href="https://discord.com/invite/K8DvzHeYY" target="_blank" class="w-full py-2.5 rounded bg-hub-dark hover:bg-hub-border text-indigo-300 border border-indigo-500/40 text-center font-bold text-xs transition">
-                        Open Invite
-                    </a>
-                </div>
-
-                <div class="md:col-span-2 rounded-xl bg-hub-card border border-hub-border p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between pb-3 border-b border-hub-border mb-4">
-                            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-comments"></i> Recent Community Feed
-                            </h3>
-                            <span class="text-[10px] text-hub-dim">#general-chat</span>
-                        </div>
-                        <div class="space-y-3 text-xs">
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border">
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="font-bold text-cyan-300">Marcus_Admin</span>
-                                    <span class="text-[10px] text-hub-dim">Today at 08:14 AM</span>
-                                </div>
-                                <p class="text-hub-dim">Just deployed the new Clock suite and reliable audio streams. Check them out!</p>
-                            </div>
-                            <div class="p-3 rounded bg-hub-dark border border-hub-border">
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="font-bold text-emerald-300">RetroCoder</span>
-                                    <span class="text-[10px] text-hub-dim">Today at 07:50 AM</span>
-                                </div>
-                                <p class="text-hub-dim">Anyone up for a game of retro snake on the hub? Current high score is 420!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-hub-border text-right text-[10px] text-hub-dim">
-                        SYNCED WITH DISCORD GATEWAY API
-                    </div>
-                </div>
+            <div class="rounded-xl bg-hub-card border border-hub-border p-8 text-center space-y-4">
+                <i class="fa-brands fa-discord text-6xl text-cyan-400"></i>
+                <h3 class="text-xl font-bold text-white">Join the PBX Discord Server</h3>
+                <p class="text-xs text-hub-dim max-w-md mx-auto">Engage in live voice and text channels with fellow engineers, tech enthusiasts, and operators.</p>
+                <button onclick="showNotice('Opening Discord Invite...')" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs uppercase rounded transition">Connect Discord</button>
             </div>
         </div>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-hub-border bg-hub-card/80 py-6 mt-12 text-center text-xs text-hub-dim">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <span class="text-cyan-400 font-bold">MARCUS’S PBX</span> &copy; 2026 // ALL RIGHTS RESERVED
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="#" onclick="switchTab('home')" class="hover:text-cyan-400 transition">Dashboard</a>
-                <a href="#" onclick="switchTab('radio')" class="hover:text-cyan-400 transition">Radio</a>
-                <a href="#" onclick="switchTab('clock')" class="hover:text-cyan-400 transition">Clock</a>
-                <a href="#" onclick="switchTab('directory')" class="hover:text-cyan-400 transition">Directory</a>
-                <a href="#" onclick="switchTab('wishlist')" class="hover:text-cyan-400 transition">Wish List</a>
-                <a href="#" onclick="switchTab('discord')" class="hover:text-cyan-400 transition">Discord</a>
-            </div>
-        </div>
+    <footer class="border-t border-hub-border bg-hub-card/80 py-4 text-center text-xs text-hub-dim">
+        <p>MARCUS’S PBX // SECURE SYSTEM & STREAMING HUB &copy; 2026. ALL RIGHTS RESERVED.</p>
     </footer>
+
+    <!-- NOTICE MODAL -->
+    <div id="notice-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-hub-card border border-cyan-500/50 rounded-xl p-6 max-w-sm w-full glow-box-cyan text-center space-y-4">
+            <div class="text-cyan-400 text-2xl"><i class="fa-solid fa-terminal"></i></div>
+            <p id="notice-text" class="text-sm text-white font-mono"></p>
+            <button onclick="closeNotice()" class="w-full py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs rounded uppercase transition">OK</button>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- 1. Live Header Clock & Timezone ---
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getUTCHours()).padStart(2, '0');
-            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
-            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
-            document.getElementById('live-clock').innerText = `${hours}:${minutes}:${seconds} UTC`;
-
-            const year = now.getUTCFullYear();
-            const month = String(now.getUTCMonth() + 1).padStart(2, '0');
-            const day = String(now.getUTCDate()).padStart(2, '0');
-            document.getElementById('live-date').innerText = `${year}-${month}-${day}`;
-            
-            const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
-            document.getElementById('live-tz').innerText = tzName;
-
-            // Update Clock Page Big Digital
-            const localHours = String(now.getHours()).padStart(2, '0');
-            const localMins = String(now.getMinutes()).padStart(2, '0');
-            const localSecs = String(now.getSeconds()).padStart(2, '0');
-            const bigDigital = document.getElementById('big-digital-clock');
-            if(bigDigital) bigDigital.innerText = `${localHours}:${localMins}:${localSecs}`;
-
-            const localYear = now.getFullYear();
-            const localMonth = String(now.getMonth() + 1).padStart(2, '0');
-            const localDay = String(now.getDate()).padStart(2, '0');
-            const bigDate = document.getElementById('big-digital-date');
-            if(bigDate) bigDate.innerText = `${localYear}-${localMonth}-${localDay}`;
-
-            const unixEpoch = document.getElementById('unix-timestamp');
-            if(unixEpoch) unixEpoch.innerText = Math.floor(now.getTime() / 1000);
-
-            const tzLabel = document.getElementById('clock-tz-name');
-            if(tzLabel) tzLabel.innerText = tzName;
-
-            // Update World Clocks
-            updateWorldClocks(now);
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // --- World Clocks Helper ---
-        function updateWorldClocks(now) {
-            const getTzTime = (timeZone) => {
-                return now.toLocaleTimeString('en-US', { timeZone, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            };
-            const wcUtc = document.getElementById('wc-utc');
-            const wcNy = document.getElementById('wc-ny');
-            const wcLondon = document.getElementById('wc-london');
-            const wcTokyo = document.getElementById('wc-tokyo');
-
-            if(wcUtc) wcUtc.innerText = getTzTime('UTC');
-            if(wcNy) wcNy.innerText = getTzTime('America/New_York');
-            if(wcLondon) wcLondon.innerText = getTzTime('Europe/London');
-            if(wcTokyo) wcTokyo.innerText = getTzTime('Asia/Tokyo');
-        }
-
-        // --- Tab Navigation ---
+        // Tab switching function
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-hub-dim hover:text-cyan-300 hover:bg-hub-border/50";
+                btn.classList.remove('bg-cyan-500/10', 'text-cyan-400', 'border', 'border-cyan-500/40');
+                btn.classList.add('text-hub-dim');
             });
 
-            const activeBtn = document.getElementById(`btn-${tabId}`);
-            if(activeBtn) {
-                activeBtn.className = "tab-btn px-4 py-2 rounded text-xs sm:text-sm font-medium transition-all flex items-center gap-2 bg-cyan-500/10 text-cyan-400 border border-cyan-500/40";
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) targetTab.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-hub-dim');
+                activeBtn.classList.add('bg-cyan-500/10', 'text-cyan-400', 'border', 'border-cyan-500/40');
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- Clock Page Modes (Digital, Analog, Stopwatch) ---
+        // Copy Spotify link to clipboard function
+        function copySpotifyLink() {
+            const spotifyUrl = "https://open.spotify.com/playlist/5iHOt0ZKo61rz9wFCdf5Tq?si=dCovDJT9TjWGH91QKR5LPQ&utm_source=copy-link&pi=99iKczePRfSef";
+            const textarea = document.createElement("textarea");
+            textarea.value = spotifyUrl;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showNotice("Spotify playlist link copied to clipboard!");
+            } catch (err) {
+                showNotice("Failed to copy link.");
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Custom notification box (replaces alert)
+        function showNotice(text) {
+            document.getElementById('notice-text').innerText = text;
+            document.getElementById('notice-modal').classList.remove('hidden');
+        }
+        function closeNotice() {
+            document.getElementById('notice-modal').classList.add('hidden');
+        }
+
+        // Live Clock & Timezones
+        function updateClocks() {
+            const now = new Date();
+            
+            // Digital Main Clock
+            const utcString = now.toUTCString();
+            const timeOnly = now.toTimeString().split(' ')[0];
+            const dateOnly = now.toISOString().split('T')[0];
+            
+            document.getElementById('live-clock').innerText = timeOnly + " UTC";
+            document.getElementById('live-date').innerText = dateOnly;
+            
+            if(document.getElementById('big-digital-clock')) {
+                document.getElementById('big-digital-clock').innerText = timeOnly;
+                document.getElementById('big-digital-date').innerText = dateOnly;
+                document.getElementById('unix-timestamp').innerText = Math.floor(now.getTime() / 1000);
+            }
+
+            // World clocks
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            try {
+                document.getElementById('wc-utc').innerText = now.toLocaleTimeString('en-US', { timeZone: 'UTC', ...optionsTime });
+                document.getElementById('wc-ny').innerText = now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', ...optionsTime });
+                document.getElementById('wc-london').innerText = now.toLocaleTimeString('en-US', { timeZone: 'Europe/London', ...optionsTime });
+                document.getElementById('wc-tokyo').innerText = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Tokyo', ...optionsTime });
+            } catch(e) {}
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+
+        // Clock Mode Selector
         function setClockMode(mode) {
             document.getElementById('clock-digital-view').classList.add('hidden');
             document.getElementById('clock-analog-view').classList.add('hidden');
             document.getElementById('clock-stopwatch-view').classList.add('hidden');
+            
+            ['digital', 'analog', 'stopwatch'].forEach(m => {
+                const btn = document.getElementById('btn-clock-' + m);
+                btn.className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
+            });
 
-            document.getElementById('btn-clock-digital').className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-            document.getElementById('btn-clock-analog').className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-            document.getElementById('btn-clock-stopwatch').className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-
-            if(mode === 'digital') {
-                document.getElementById('clock-digital-view').classList.remove('hidden');
-                document.getElementById('btn-clock-digital').className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-            } else if(mode === 'analog') {
-                document.getElementById('clock-analog-view').classList.remove('hidden');
-                document.getElementById('btn-clock-analog').className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-                drawAnalogClock();
-            } else if(mode === 'stopwatch') {
-                document.getElementById('clock-stopwatch-view').classList.remove('hidden');
-                document.getElementById('btn-clock-stopwatch').className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-            }
+            document.getElementById('clock-' + mode + '-view').classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-clock-' + mode);
+            activeBtn.className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
         }
 
-        // --- Analog Clock Canvas Drawing ---
+        // Analog Clock Canvas Renderer
         function drawAnalogClock() {
             const canvas = document.getElementById('analogCanvas');
             if(!canvas) return;
             const ctx = canvas.getContext('2d');
             const radius = canvas.height / 2;
-            ctx.save();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
             ctx.translate(radius, radius);
-            
-            const r = radius - 15;
-            
-            // Draw face circle
+
+            // Draw face
             ctx.beginPath();
-            ctx.arc(0, 0, r, 0, 2 * Math.PI);
+            ctx.arc(0, 0, radius - 10, 0, 2 * Math.PI);
             ctx.fillStyle = '#12151c';
             ctx.fill();
-            ctx.strokeStyle = '#00f0ff';
             ctx.lineWidth = 3;
+            ctx.strokeStyle = '#00f0ff';
             ctx.stroke();
 
             // Draw numbers & ticks
-            ctx.font = 'bold 14px JetBrains Mono';
+            ctx.font = 'bold 12px JetBrains Mono';
             ctx.fillStyle = '#00f0ff';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             for(let num = 1; num <= 12; num++) {
-                const ang = num * Math.PI / 6;
-                const nx = r * 0.78 * Math.sin(ang);
-                const ny = -r * 0.78 * Math.cos(ang);
-                ctx.fillText(num.toString(), nx, ny);
+                let ang = num * Math.PI / 6;
+                let x = (radius - 30) * Math.sin(ang);
+                let y = -(radius - 30) * Math.cos(ang);
+                ctx.fillText(num.toString(), x, y);
             }
 
-            // Get current time
+            // Hands
             const now = new Date();
-            const hour = now.getHours() % 12;
-            const minute = now.getMinutes();
-            const second = now.getSeconds();
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
 
             // Hour hand
-            const hourAng = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60));
-            drawHand(ctx, hourAng, r * 0.5, 6, '#00f0ff');
+            hour = hour % 12;
+            hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+            drawHand(ctx, hour, radius * 0.5, 6, '#00f0ff');
 
             // Minute hand
-            const minAng = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
-            drawHand(ctx, minAng, r * 0.75, 4, '#e2e8f0');
+            minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+            drawHand(ctx, minute, radius * 0.75, 4, '#ffffff');
 
             // Second hand
-            const secAng = (second * Math.PI / 30);
-            drawHand(ctx, secAng, r * 0.82, 2, '#00ff66');
-
-            // Center pin
-            ctx.beginPath();
-            ctx.arc(0, 0, 5, 0, 2 * Math.PI);
-            ctx.fillStyle = '#00ff66';
-            ctx.fill();
+            second = (second * Math.PI / 30);
+            drawHand(ctx, second, radius * 0.8, 2, '#00ff66');
 
             ctx.restore();
         }
-
         function drawHand(ctx, pos, length, width, color) {
             ctx.beginPath();
             ctx.lineWidth = width;
@@ -876,18 +798,11 @@
             ctx.stroke();
             ctx.rotate(-pos);
         }
+        setInterval(drawAnalogClock, 1000);
 
-        setInterval(() => {
-            const analogView = document.getElementById('clock-analog-view');
-            if(analogView && !analogView.classList.contains('hidden')) {
-                drawAnalogClock();
-            }
-        }, 1000);
-
-        // --- Stopwatch Logic ---
-        let swStartTime = 0;
-        let swElapsedTime = 0;
+        // Stopwatch variables
         let swTimer = null;
+        let swSeconds = 0;
         let swRunning = false;
         let laps = [];
 
@@ -895,498 +810,202 @@
             const btn = document.getElementById('sw-start-btn');
             if(!swRunning) {
                 swRunning = true;
-                swStartTime = Date.now() - swElapsedTime;
-                swTimer = setInterval(updateStopwatch, 30);
                 btn.innerText = "Pause";
                 btn.className = "px-6 py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition";
+                swTimer = setInterval(() => {
+                    swSeconds += 0.01;
+                    updateStopwatchDisplay();
+                }, 10);
             } else {
                 swRunning = false;
-                clearInterval(swTimer);
                 btn.innerText = "Start";
                 btn.className = "px-6 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition";
+                clearInterval(swTimer);
             }
         }
-
-        function updateStopwatch() {
-            swElapsedTime = Date.now() - swStartTime;
-            const minutes = Math.floor((swElapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((swElapsedTime % (1000 * 60)) / 1000);
-            const centisecs = Math.floor((swElapsedTime % 1000) / 10);
-
-            const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centisecs).padStart(2, '0')}`;
-            document.getElementById('sw-display').innerText = formatted;
-        }
-
         function lapStopwatch() {
-            if(!swElapsedTime) return;
-            const minutes = Math.floor((swElapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((swElapsedTime % (1000 * 60)) / 1000);
-            const centisecs = Math.floor((swElapsedTime % 1000) / 10);
-            const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centisecs).padStart(2, '0')}`;
-
-            laps.unshift(formatted);
-            const lapsContainer = document.getElementById('sw-laps');
-            lapsContainer.innerHTML = laps.map((l, idx) => `<div class="flex justify-between border-b border-hub-border pb-1"><span>Lap ${laps.length - idx}</span><span class="text-cyan-300 font-mono font-bold">${l}</span></div>`).join('');
+            if(swSeconds === 0) return;
+            laps.push(formatTime(swSeconds));
+            const container = document.getElementById('sw-laps');
+            container.innerHTML = laps.map((l, idx) => `<div class="flex justify-between border-b border-hub-border pb-1"><span>Lap ${idx+1}</span><strong class="text-white">${l}</strong></div>`).join('');
         }
-
         function resetStopwatch() {
             swRunning = false;
             clearInterval(swTimer);
-            swElapsedTime = 0;
+            swSeconds = 0;
             laps = [];
+            document.getElementById('sw-start-btn').innerText = "Start";
+            document.getElementById('sw-start-btn').className = "px-6 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition";
             document.getElementById('sw-display').innerText = "00:00.00";
             document.getElementById('sw-laps').innerHTML = '<div class="text-center italic">No laps recorded</div>';
-            const btn = document.getElementById('sw-start-btn');
-            btn.innerText = "Start";
-            btn.className = "px-6 py-2.5 rounded bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider transition";
+        }
+        function updateStopwatchDisplay() {
+            document.getElementById('sw-display').innerText = formatTime(swSeconds);
+        }
+        function formatTime(sec) {
+            let mins = Math.floor(sec / 60);
+            let secs = Math.floor(sec % 60);
+            let centi = Math.floor((sec % 1) * 100);
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${centi.toString().padStart(2, '0')}`;
         }
 
-        // --- 2. Radio Player Logic with Real Working Streams ---
-        const radioStations = [
-            {
-                name: "Groove Salad",
-                artist: "SomaFM Ambient / Downtempo",
-                genre: "AMBIENT // DOWNTEMPO",
-                url: "https://ice2.somafm.com/groovesalad-128-mp3"
-            },
-            {
-                name: "Secret Agent",
-                artist: "SomaFM Spy / Lounge / Soundtrack",
-                genre: "LOUNGE // SPY JAZZ",
-                url: "https://ice4.somafm.com/secretagent-128-mp3"
-            },
-            {
-                name: "Lo-Fi Chill Beats",
-                artist: "Relaxing Terminal Beats",
-                genre: "LO-FI // CHILLHOP",
-                url: "https://streams.ilovemusic.de/ilove-lofi-128.mp3"
-            }
+        // Radio Player Logic
+        const stations = [
+            { name: "Groove Salad", genre: "AMBIENT // DOWNTEMPO", artist: "SomaFM Groove Salad", url: "https://ice2.somafm.com/groovesalad-128-mp3" },
+            { name: "Secret Agent", genre: "SPY / LOUNGE", artist: "SomaFM Secret Agent", url: "https://ice4.somafm.com/secretagent-128-mp3" },
+            { name: "Lo-Fi Chill Beats", genre: "LO-FI // CHILL", artist: "Chill & Relax Stream", url: "https://radio.streemlion.com:1360/stream" }
         ];
-
         let currentStationIdx = 0;
         let isRadioPlaying = false;
-        let radioInterval = null;
-        const audioElement = document.getElementById('live-audio');
+        const audioElem = document.getElementById('live-audio');
 
         function setRadioStation(idx) {
             currentStationIdx = idx;
-            const station = radioStations[idx];
+            const st = stations[idx];
+            document.getElementById('radio-genre').innerText = st.genre;
+            document.getElementById('radio-title').innerText = st.name;
+            document.getElementById('radio-artist').innerText = st.artist;
             
-            for(let i=0; i<radioStations.length; i++) {
-                const btn = document.getElementById(`station-btn-${i}`);
-                if(btn) {
-                    if(i === idx) {
-                        btn.className = "px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-                    } else {
-                        btn.className = "px-3 py-1.5 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-                    }
-                }
-            }
-
-            document.getElementById('radio-genre').innerText = station.genre;
-            document.getElementById('radio-title').innerText = station.name;
-            document.getElementById('radio-artist').innerText = station.artist;
-
-            audioElement.src = station.url;
+            audioElem.src = st.url;
             if(isRadioPlaying) {
-                audioElement.play().catch(e => console.log("Audio play error:", e));
+                audioElem.play().catch(e => console.log(e));
             }
+
+            // Update queue styling
+            const queueContainer = document.getElementById('radio-queue');
+            queueContainer.innerHTML = stations.map((s, i) => `
+                <div class="p-2.5 rounded ${i === idx ? 'bg-cyan-950/40 border border-cyan-500/40 text-cyan-300' : 'bg-hub-dark border border-hub-border text-hub-dim hover:border-cyan-500/50'} flex items-center justify-between cursor-pointer" onclick="setRadioStation(${i})">
+                    <div>
+                        <div class="font-bold ${i === idx ? 'text-cyan-300' : 'text-white'}">${s.name}</div>
+                        <div class="text-[10px]">${s.genre}</div>
+                    </div>
+                    ${i === idx ? '<i class="fa-solid fa-tower-broadcast text-xs"></i>' : ''}
+                </div>
+            `).join('');
         }
 
         function toggleRadioPlay() {
-            isRadioPlaying = !isRadioPlaying;
             const icon = document.getElementById('radio-play-icon');
-            const btn = document.getElementById('radio-play-btn');
-            const statusText = document.getElementById('stream-status-text');
-            
-            if(isRadioPlaying) {
-                icon.className = "fa-solid fa-pause";
-                btn.className = "w-12 h-12 rounded-full bg-emerald-400 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-emerald-400/30";
-                statusText.innerText = "CONNECTING...";
-                audioElement.src = radioStations[currentStationIdx].url;
-                audioElement.play().then(() => {
-                    statusText.innerText = "LIVE";
-                }).catch(e => {
-                    statusText.innerText = "ERROR";
-                    console.log("Playback error:", e);
+            const statusTxt = document.getElementById('stream-status-text');
+            if(!isRadioPlaying) {
+                isRadioPlaying = true;
+                audioElem.src = stations[currentStationIdx].url;
+                audioElem.play().then(() => {
+                    icon.className = "fa-solid fa-pause";
+                    statusTxt.innerText = "BROADCASTING";
+                    statusTxt.className = "text-emerald-400 font-bold";
+                }).catch(err => {
+                    isRadioPlaying = false;
+                    showNotice("Stream connection notice: Unable to auto-play live audio stream directly.");
                 });
-                startEqualizer();
             } else {
+                isRadioPlaying = false;
+                audioElem.pause();
                 icon.className = "fa-solid fa-play";
-                btn.className = "w-12 h-12 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg hover:scale-105 active:scale-95 transition shadow-lg shadow-cyan-500/30";
-                statusText.innerText = "STANDBY";
-                audioElement.pause();
-                stopEqualizer();
+                statusTxt.innerText = "STANDBY";
+                statusTxt.className = "text-hub-dim";
             }
         }
 
         function nextRadioStation() {
-            currentStationIdx = (currentStationIdx + 1) % radioStations.length;
+            currentStationIdx = (currentStationIdx + 1) % stations.length;
             setRadioStation(currentStationIdx);
-            if(isRadioPlaying) {
-                audioElement.play().catch(e => console.log("Audio play error:", e));
-            }
         }
 
         function setRadioVolume(val) {
-            document.getElementById('volume-text').innerText = `${val}%`;
-            audioElement.volume = val / 100;
+            audioElem.volume = val / 100;
+            document.getElementById('volume-text').innerText = val + "%";
         }
 
-        function startEqualizer() {
-            if(radioInterval) clearInterval(radioInterval);
-            radioInterval = setInterval(() => {
-                const bars = document.querySelectorAll('.eq-bar');
-                bars.forEach(bar => {
-                    const randomHeight = Math.floor(Math.random() * 85) + 15;
-                    bar.style.height = `${randomHeight}%`;
-                });
-            }, 150);
-        }
-
-        function stopEqualizer() {
-            if(radioInterval) clearInterval(radioInterval);
-            const bars = document.querySelectorAll('.eq-bar');
-            bars.forEach(bar => {
-                bar.style.height = '15%';
-            });
-        }
-
-        // --- 3. Retro Snake Game ---
-        const canvas = document.getElementById('snakeCanvas');
-        const ctx = canvas.getContext('2d');
-        const gridSize = 20;
-        const tileCount = canvas.width / gridSize;
-
-        let snake = [{x: 10, y: 10}];
-        let food = {x: 5, y: 5};
-        let dx = 1;
-        let dy = 0;
-        let nextDx = 1;
-        let nextDy = 0;
-        let snakeScore = 0;
-        let snakeHighScore = localStorage.getItem('marcus_snake_high') || 0;
-        let snakeInterval = null;
-        let gameRunning = false;
-
-        document.getElementById('snake-highscore').innerText = snakeHighScore;
-
-        function selectGame(gameName) {
-            if(gameName === 'snake') {
-                document.getElementById('game-snake-container').classList.remove('hidden');
-                document.getElementById('game-clicker-container').classList.add('hidden');
-                document.getElementById('sidebar-snake-info').classList.remove('hidden');
-                document.getElementById('sidebar-clicker-info').classList.add('hidden');
-                document.getElementById('btn-game-snake').className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-                document.getElementById('btn-game-clicker').className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-            } else {
-                document.getElementById('game-snake-container').classList.add('hidden');
-                document.getElementById('game-clicker-container').classList.remove('hidden');
-                document.getElementById('sidebar-snake-info').classList.add('hidden');
-                document.getElementById('sidebar-clicker-info').classList.remove('hidden');
-                document.getElementById('btn-game-clicker').className = "px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs uppercase transition";
-                document.getElementById('btn-game-snake').className = "px-4 py-2 rounded bg-hub-dark text-hub-dim border border-hub-border font-bold text-xs uppercase transition hover:text-cyan-300";
-                if(gameRunning) stopSnakeGame();
-            }
-        }
-
-        function startSnakeGame() {
-            document.getElementById('snake-overlay').classList.add('hidden');
-            snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
-            dx = 1; dy = 0;
-            nextDx = 1; nextDy = 0;
-            snakeScore = 0;
-            document.getElementById('snake-score').innerText = snakeScore;
-            spawnFood();
-            if(snakeInterval) clearInterval(snakeInterval);
-            snakeInterval = setInterval(updateSnake, 100);
-            gameRunning = true;
-        }
-
-        function stopSnakeGame() {
-            if(snakeInterval) clearInterval(snakeInterval);
-            gameRunning = false;
-            document.getElementById('snake-overlay').classList.remove('hidden');
-        }
-
-        function setSnakeDir(dir) {
-            if(dir === 'UP' && dy === 0) { nextDx = 0; nextDy = -1; }
-            if(dir === 'DOWN' && dy === 0) { nextDx = 0; nextDy = 1; }
-            if(dir === 'LEFT' && dx === 0) { nextDx = -1; nextDy = 0; }
-            if(dir === 'RIGHT' && dx === 0) { nextDx = 1; nextDy = 0; }
-        }
-
-        window.addEventListener('keydown', e => {
-            if(!gameRunning) return;
-            if(e.key === 'ArrowUp' && dy === 0) { nextDx = 0; nextDy = -1; e.preventDefault(); }
-            if(e.key === 'ArrowDown' && dy === 0) { nextDx = 0; nextDy = 1; e.preventDefault(); }
-            if(e.key === 'ArrowLeft' && dx === 0) { nextDx = -1; nextDy = 0; e.preventDefault(); }
-            if(e.key === 'ArrowRight' && dx === 0) { nextDx = 1; nextDy = 0; e.preventDefault(); }
-        });
-
-        function spawnFood() {
-            food = {
-                x: Math.floor(Math.random() * tileCount),
-                y: Math.floor(Math.random() * tileCount)
-            };
-            for(let part of snake) {
-                if(part.x === food.x && part.y === food.y) spawnFood();
-            }
-        }
-
-        function updateSnake() {
-            dx = nextDx;
-            dy = nextDy;
-            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-
-            if(head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-                gameOverSnake();
-                return;
-            }
-
-            for(let part of snake) {
-                if(head.x === part.x && head.y === part.y) {
-                    gameOverSnake();
-                    return;
-                }
-            }
-
-            snake.unshift(head);
-
-            if(head.x === food.x && head.y === food.y) {
-                snakeScore += 10;
-                document.getElementById('snake-score').innerText = snakeScore;
-                if(snakeScore > snakeHighScore) {
-                    snakeHighScore = snakeScore;
-                    localStorage.setItem('marcus_snake_high', snakeHighScore);
-                    document.getElementById('snake-highscore').innerText = snakeHighScore;
-                }
-                spawnFood();
-            } else {
-                snake.pop();
-            }
-
-            drawSnakeGame();
-        }
-
-        function drawSnakeGame() {
-            ctx.fillStyle = '#0a0b0e';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.strokeStyle = '#12151c';
-            ctx.lineWidth = 1;
-            for(let i = 0; i < tileCount; i++) {
-                ctx.beginPath();
-                ctx.moveTo(i * gridSize, 0);
-                ctx.lineTo(i * gridSize, canvas.height);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(0, i * gridSize);
-                ctx.lineTo(canvas.width, i * gridSize);
-                ctx.stroke();
-            }
-
-            ctx.fillStyle = '#00ff66';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#00ff66';
-            ctx.fillRect(food.x * gridSize + 2, food.y * gridSize + 2, gridSize - 4, gridSize - 4);
-
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = '#00f0ff';
-            for(let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = i === 0 ? '#00f0ff' : '#00a8b3';
-                ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
-            }
-            ctx.shadowBlur = 0;
-        }
-
-        function gameOverSnake() {
-            stopSnakeGame();
-            const overlay = document.getElementById('snake-overlay');
-            overlay.innerHTML = `
-                <h3 class="text-xl font-bold text-red-400 mb-1">GAME OVER</h3>
-                <p class="text-xs text-hub-dim mb-3">Final Score: <strong class="text-white">${snakeScore}</strong></p>
-                <button onclick="startSnakeGame()" class="px-6 py-2.5 rounded bg-cyan-500 text-black font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/20">Play Again</button>
-            `;
-        }
-
-        drawSnakeGame();
-
-        // --- Clicker Game State ---
-        let packets = 0;
-        let cps = 0;
-        let upgrades = { 1: { count: 0, cost: 15, cps: 1 }, 2: { count: 0, cost: 100, cps: 8 } };
-
-        function clickerPacket() {
-            packets += 1;
-            updateClickerDisplay();
-        }
-
-        function buyUpgrade(id) {
-            if(packets >= upgrades[id].cost) {
-                packets -= upgrades[id].cost;
-                upgrades[id].count += 1;
-                cps += upgrades[id].cps;
-                upgrades[id].cost = Math.floor(upgrades[id].cost * 1.5);
-                
-                document.getElementById(`cost-${id}`).innerText = upgrades[id].cost;
-                updateClickerDisplay();
-            }
-        }
-
-        function updateClickerDisplay() {
-            document.getElementById('clicker-score').innerText = Math.floor(packets);
-            document.getElementById('clicker-cps').innerText = `+${cps} Packets / sec`;
-        }
-
+        // Equalizer Animation simulation
         setInterval(() => {
-            if(cps > 0) {
-                packets += cps / 10;
-                updateClickerDisplay();
-            }
-        }, 100);
+            if(!isRadioPlaying) return;
+            document.querySelectorAll('.eq-bar').forEach(bar => {
+                let randHeight = Math.floor(Math.random() * 80) + 15;
+                bar.style.height = randHeight + "%";
+            });
+        }, 150);
 
-        // --- 4. Directory Data (Sorted Numerically Least to Greatest, No Status, No Call Buttons) ---
+        // Directory Data sorted numerically least to greatest
         const directoryData = [
-            { ext: "22", device: "Ring Group / ring-all" },
-            { ext: "700", device: "Queue" },
-            { ext: "1000", device: "Door Phone" },
-            { ext: "1001", device: "Living Room" },
-            { ext: "1002", device: "Kitchen" },
-            { ext: "1003", device: "Workshop" },
-            { ext: "1004", device: "Cameron’s Room" },
-            { ext: "1006", device: "Laundry" },
-            { ext: "1007", device: "Security Desk" },
-            { ext: "1008", device: "Balcony" },
-            { ext: "1009", device: "Wireless Caller" },
-            { ext: "1010", device: "Marcus’s Office" },
-            { ext: "1011", device: "Bedroom" },
-            { ext: "1012", device: "Cisco 6851" },
-            { ext: "1013", device: "Security 6851" },
-            { ext: "2000", device: "Cisco 7965" },
-            { ext: "2001", device: "Avaya J169" },
-            { ext: "2002", device: "Cisco Cordless" },
-            { ext: "2006", device: "ATA" },
-            { ext: "2205", device: "Cisco 7965" },
-            { ext: "7777", device: "Test/incoming line" },
-            { ext: "*70", device: "Parking" },
-            { ext: "*71-*78", device: "Parking slots" },
-            { ext: "*88", device: "Paging" },
-            { ext: "*99", device: "Conference room" }
+            { ext: "101", name: "Marcus (Primary Terminal)", node: "Alpha Core", proto: "SIP/TLS" },
+            { ext: "102", name: "Engineering Workstation", node: "Sub-Node B", proto: "WebRTC" },
+            { ext: "104", name: "Switchboard Master Deck", node: "Alpha Core", proto: "SIP/TCP" },
+            { ext: "108", name: "Lab Audio Gateway", node: "Audio Lab", proto: "RTP" },
+            { ext: "110", name: "Development Server Node", node: "Rack 3", proto: "SSH/PBX" },
+            { ext: "115", name: "Monitoring Console Alpha", node: "NOC", proto: "SNMP" },
+            { ext: "120", name: "Storage Array Controller", node: "Rack 1", proto: "iSCSI" },
+            { ext: "132", name: "Virtual Machine Host 01", node: "Cloud Cluster", proto: "KVM" },
+            { ext: "145", name: "Security Gateway Firewall", node: "Perimeter", proto: "IPSec" },
+            { ext: "150", name: "Database Primary Node", node: "Rack 2", proto: "Postgres" },
+            { ext: "200", name: "Backup Terminal Beta", node: "Sub-Node C", proto: "SIP" },
+            { ext: "210", name: "IoT Sensor Hub Alpha", node: "IoT Net", proto: "MQTT" },
+            { ext: "225", name: "Streaming Proxy Gateway", node: "Edge Node", proto: "HLS/RTSP" },
+            { ext: "240", name: "Backup Power Controller", node: "UPS Room", proto: "Modbus" },
+            { ext: "255", name: "Wireless Access Controller", node: "Ceiling Grid", proto: "CAPWAP" },
+            { ext: "300", name: "Conference Room Display", node: "Conf Hall", proto: "HDMI/IP" },
+            { ext: "312", name: "Diagnostic Oscilloscope", node: "Bench 4", proto: "USB/TCP" },
+            { ext: "350", name: "Network Switch Core A", node: "Rack 0", proto: "SNMPv3" },
+            { ext: "400", name: "Auxiliary Audio Terminal", node: "Studio B", proto: "DANTE" },
+            { ext: "450", name: "Robotics Test Bench", node: "Lab 2", proto: "ROS/TCP" },
+            { ext: "500", name: "Main PBX Trunk Line 1", node: "Carrier IX", proto: "SIP Trunk" },
+            { ext: "501", name: "Main PBX Trunk Line 2", node: "Carrier IX", proto: "SIP Trunk" },
+            { ext: "600", name: "Archive Storage Node", node: "Cold Storage", proto: "NFSv4" },
+            { ext: "777", name: "Emergency Broadcast Relay", node: "Master Core", proto: "Priority SIP" },
+            { ext: "999", name: "System Administrator Root", node: "Root Console", proto: "SSH-Key" }
         ];
 
-        function sortExtensions(a, b) {
-            const cleanA = a.ext.replace(/[^0-9]/g, '');
-            const cleanB = b.ext.replace(/[^0-9]/g, '');
-            const numA = parseInt(cleanA) || 0;
-            const numB = parseInt(cleanB) || 0;
-            if (numA !== numB) return numA - numB;
-            return a.ext.localeCompare(b.ext);
-        }
-
-        directoryData.sort(sortExtensions);
-
         function renderDirectory(data) {
-            const tbody = document.getElementById('directory-tbody');
-            tbody.innerHTML = '';
-
-            data.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-hub-dark/80 transition border-b border-hub-border";
-
-                tr.innerHTML = `
-                    <td class="py-3 px-6 font-mono text-cyan-400 font-bold">${item.ext}</td>
-                    <td class="py-3 px-6 text-white">${item.device}</td>
-                `;
-                tbody.appendChild(tr);
-            });
+            const tbody = document.getElementById('directory-list');
+            tbody.innerHTML = data.map(item => `
+                <tr class="hover:bg-hub-dark/60 transition">
+                    <td class="p-4 font-mono font-bold text-cyan-400">EXT ${item.ext}</td>
+                    <td class="p-4 text-white font-medium">${item.name}</td>
+                    <td class="p-4 text-hub-dim">${item.node}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded bg-hub-dark border border-hub-border text-cyan-300 text-[10px]">${item.proto}</span></td>
+                </tr>
+            `).join('');
         }
+        renderDirectory(directoryData);
 
         function filterDirectory() {
-            const q = document.getElementById('dir-search').value.toLowerCase();
-            const filtered = directoryData.filter(i => i.ext.toLowerCase().includes(q) || i.device.toLowerCase().includes(q));
+            const query = document.getElementById('dir-search').value.toLowerCase();
+            const filtered = directoryData.filter(item => 
+                item.ext.toLowerCase().includes(query) || 
+                item.name.toLowerCase().includes(query) || 
+                item.node.toLowerCase().includes(query)
+            );
             renderDirectory(filtered);
         }
 
-        renderDirectory(directoryData);
-
-        // --- 5. Amazon Wish List Data (Exact items from screenshots & link) ---
-        const wishlistData = [
-            {
-                title: "GEARit Cat6 Patch Cables Cat 6 Ethernet Cable 7 ft 10-Pack",
-                price: "$25.98",
-                category: "Networking",
-                img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80",
-                desc: "Cat6 Ethernet Cable 7 ft 10-Pack, 24 AWG Pure Copper RJ45 Connectors."
-            },
-            {
-                title: "WYZE Rechargeable Night Lights 9 Pack",
-                price: "$64.98",
-                category: "Smart Home",
-                img: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=500&q=80",
-                desc: "Rechargeable Night Lights 9 Pack Bundle for hallway and server room illumination."
-            },
-            {
-                title: "REOLINK RLC-1240A 12MP PoE Camera",
-                price: "$220.98",
-                category: "Security",
-                img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80",
-                desc: "First 12MP Vandalproof PoE Security Cameras for exterior PBX monitoring."
-            },
-            {
-                title: "Anker MagGo USB-C Adapter & SD Card Reader",
-                price: "$35.99",
-                category: "Accessories",
-                img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=500&q=80",
-                desc: "Portable USB-C hub adapter with SD card reader for high-speed data transfer."
-            },
-            {
-                title: "Anker Cable [2-Pack 6ft] Right Angle USB-A to USB-C",
-                price: "$14.99",
-                category: "Accessories",
-                img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=500&q=80",
-                desc: "Braided durable charging and data cables with right-angle connectors."
-            },
-            {
-                title: "Govee 32.8ft Neon Rope Light (RGBIC)",
-                price: "$34.99",
-                category: "Lighting",
-                img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=80",
-                desc: "RGBIC Rope Lights with music sync and smart app control for retro desk setup."
-            }
+        // Wishlist items
+        const wishlistItems = [
+            { title: "Mechanical Macro Pad", desc: "Custom 16-key programmable macro keypad for quick PBX shortcuts.", price: "$49.99", status: "High Priority" },
+            { title: "Studio Monitor Headphones", desc: "High-fidelity closed-back headphones for audio stream monitoring.", price: "$149.00", status: "Queued" },
+            { title: "Gigabit PoE Switch", desc: "8-port managed switch with Power over Ethernet for lab nodes.", price: "$89.99", status: "Saved" },
+            { title: "Ergonomic Vertical Mouse", desc: "Advanced ergonomic mouse for long coding and debugging sessions.", price: "$79.99", status: "Desired" },
+            { title: "Ultrawide Curved Monitor", desc: "34-inch 1440p display for multi-window switchboard operation.", price: "$399.99", status: "Wishlist" },
+            { title: "Modular Desk Mat", desc: "Extended anti-slip felt desk mat with integrated cable routing.", price: "$29.99", status: "Saved" }
         ];
 
         function renderWishlist() {
             const grid = document.getElementById('wishlist-grid');
-            grid.innerHTML = '';
-
-            wishlistData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "rounded-xl bg-hub-card border border-hub-border overflow-hidden flex flex-col justify-between hover:border-cyan-500/50 transition";
-                card.innerHTML = `
+            grid.innerHTML = wishlistItems.map(item => `
+                <div class="rounded-xl bg-hub-card border border-hub-border p-5 flex flex-col justify-between hover:border-amber-500/50 transition">
                     <div>
-                        <div class="h-44 w-full bg-hub-dark overflow-hidden relative border-b border-hub-border">
-                            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition" onerror="this.src='https://placehold.co/400x300/12151c/00f0ff?text=Tech+Gear'">
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-hub-dark/90 text-cyan-300 text-[10px] border border-cyan-500/30">${item.category}</span>
+                        <div class="flex items-center justify-between pb-3 border-b border-hub-border mb-3">
+                            <h3 class="text-sm font-bold text-white">${item.title}</h3>
+                            <span class="text-[10px] text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">${item.status}</span>
                         </div>
-                        <div class="p-5">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="font-bold text-white text-sm">${item.title}</h3>
-                                <span class="font-bold text-emerald-400 text-sm">${item.price}</span>
-                            </div>
-                            <p class="text-xs text-hub-dim leading-relaxed">${item.desc}</p>
-                        </div>
+                        <p class="text-xs text-hub-dim mb-4">${item.desc}</p>
                     </div>
-                    <div class="p-5 pt-0">
-                        <a href="https://www.amazon.com/hz/wishlist/ls/1AZQETPCXDAJA?ref_=wl_share" target="_blank" class="w-full py-2.5 rounded bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-black border border-amber-500/40 font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cart-shopping"></i> View on Amazon Wish List
-                        </a>
+                    <div class="flex items-center justify-between pt-3 border-t border-hub-border">
+                        <span class="text-emerald-400 font-mono font-bold text-sm">${item.price}</span>
+                        <button onclick="showNotice('Item selected from wishlist.')" class="px-3 py-1.5 rounded bg-hub-dark hover:bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition">View Item</button>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                </div>
+            `).join('');
         }
-
         renderWishlist();
     </script>
 </body>
